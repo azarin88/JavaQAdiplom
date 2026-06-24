@@ -28,6 +28,44 @@ public class SavingAccountTest {
     }
 
     @Test
+    public void shouldThrowExceptionWhenMaxBalanceLessThanMinBalance() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SavingAccount(
+                        INITIAL_BALANCE,
+                        MIN_BALANCE,
+                        MIN_BALANCE - 500,
+                        RATE
+                )
+        );
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenInitialBalanceLessThanMinBalance() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SavingAccount(
+                        MIN_BALANCE - 500,
+                        MIN_BALANCE,
+                        MAX_BALANCE,
+                        RATE
+                )
+        );
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenInitialBalanceGreaterThanMaxBalance() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SavingAccount(
+                        MAX_BALANCE + 500,
+                        MIN_BALANCE,
+                        MAX_BALANCE,
+                        RATE
+                )
+        );
+    }
+    @Test
     public void shouldAddMoneyToBalance() {
         SavingAccount account = new SavingAccount(
                 INITIAL_BALANCE,

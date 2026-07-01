@@ -148,7 +148,7 @@ public class CreditAccountTest {
 
         account.pay(1000);
 
-        Assertions.assertEquals(150, account.yearChange());
+        Assertions.assertEquals(-150, account.yearChange());
     }
     @Test
     public void shouldYearChangeWithBalanceEqualNull() {

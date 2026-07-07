@@ -24,6 +24,25 @@ public class SavingAccount extends Account {
             throw new IllegalArgumentException(
               "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
+        } if (minBalance < 0) {
+            throw new IllegalArgumentException(
+                    "Минимальный баланс не может быть отрицательным, а у вас: " + minBalance
+            );
+        } if (maxBalance < minBalance) {
+            throw new IllegalArgumentException(
+                    "Максимальный баланс не может быть меньше минимального, а у вас максимальный баланс: " + maxBalance +
+                            " и минимальный баланс: " + minBalance
+            );
+        } if (initialBalance < minBalance) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс не может быть меньше минимального, а у вас начальный баланс: " + initialBalance +
+                            " и минимальный баланс: " + minBalance
+            );
+        } if (initialBalance > maxBalance) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс не может быть больше максимального, а у вас начальный баланс: " + initialBalance +
+                            " и максимальный баланс: " + maxBalance
+            );
         }
         this.balance = initialBalance;
         this.minBalance = minBalance;
@@ -49,6 +68,7 @@ public class SavingAccount extends Account {
         if (balance > minBalance) {
             return true;
         } else {
+            balance += amount;
             return false;
         }
     }
@@ -70,7 +90,7 @@ public class SavingAccount extends Account {
             return false;
         }
         if (balance + amount < maxBalance) {
-            balance = amount;
+            balance += amount;
             return true;
         } else {
             return false;
